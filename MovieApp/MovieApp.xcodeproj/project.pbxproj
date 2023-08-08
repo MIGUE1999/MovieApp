@@ -21,6 +21,7 @@
 		4B7275EA2A80CC0B000CC97B /* MovieStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7275E92A80CC0B000CC97B /* MovieStore.swift */; };
 		4B7275ED2A80CE0A000CC97B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7275EC2A80CE0A000CC97B /* Utils.swift */; };
 		4B7275F02A80EACE000CC97B /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7275EF2A80EACE000CC97B /* HomeViewModel.swift */; };
+		4BA3E8222A81801100D83515 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA3E8212A81801100D83515 /* SplashScreenView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		4B7275E92A80CC0B000CC97B /* MovieStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieStore.swift; sourceTree = "<group>"; };
 		4B7275EC2A80CE0A000CC97B /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		4B7275EF2A80EACE000CC97B /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		4BA3E8212A81801100D83515 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 		4B7275AE2A80C2B5000CC97B /* MovieApp */ = {
 			isa = PBXGroup;
 			children = (
+				4BA3E8202A81736400D83515 /* App */,
 				4B7275EE2A80EABB000CC97B /* Presentation */,
 				4B7275E62A80CBCE000CC97B /* Data */,
 				4B7275DF2A80C5F8000CC97B /* Domain */,
@@ -204,6 +207,14 @@
 				4B7275EF2A80EACE000CC97B /* HomeViewModel.swift */,
 			);
 			path = Presentation;
+			sourceTree = "<group>";
+		};
+		4BA3E8202A81736400D83515 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				4BA3E8212A81801100D83515 /* SplashScreenView.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,6 +350,7 @@
 			files = (
 				4B7275B42A80C2B5000CC97B /* ViewController.swift in Sources */,
 				4B7275B02A80C2B5000CC97B /* AppDelegate.swift in Sources */,
+				4BA3E8222A81801100D83515 /* SplashScreenView.swift in Sources */,
 				4B7275E22A80C624000CC97B /* Movie.swift in Sources */,
 				4B7275F02A80EACE000CC97B /* HomeViewModel.swift in Sources */,
 				4B7275ED2A80CE0A000CC97B /* Utils.swift in Sources */,
