@@ -7,20 +7,31 @@
 
 import Foundation
 
-
 final class HomeViewModel{
-    
+
     private let movieStore: MovieService
-    private let viewController: ViewController
-    
-    init(movieStore: MovieService, viewController: ViewController){
+    private let homeViewController: HomeViewController
+    var mostPopularMovies: MovieResponse?
+    var topRatedMovies: MovieResponse?
+
+    init(movieStore: MovieService, homeViewController: HomeViewController){
         self.movieStore = movieStore
-        self.viewController = viewController
-        self.fetchMovie(id: 346698)
-        self.fetchMovies()
-        self.searchMovie(query: "Barbie")
+        self.homeViewController = homeViewController
+        //self.fetchMovie(id: 346698)
+        self.fetchMovies(from: .popular){
+            DispatchQueue.main.async {
+                self.homeViewController.movieMostPopularCollectionView.reloadData()
+            }
+        }
+        
+        self.fetchMovies(from: .topRated){
+            DispatchQueue.main.async {
+                self.homeViewController.movieTopRatedCollectionView.reloadData()
+            }
+        }
+        //self.searchMovie(query: "Barbie")
     }
-    
+
     func fetchMovie(id: Int) {
         movieStore.fetchMovie(id: id) { movie, movieError in
             if(movie != nil) {
@@ -34,21 +45,30 @@ final class HomeViewModel{
             }
         }
     }
-    
-    func fetchMovies() {
-        movieStore.fetchMovies(from: .popular){ movies, movieError in
+
+    func fetchMovies(from endpoint: MovieListEndpoint, completion: @escaping () -> ()) {
+        movieStore.fetchMovies(from: endpoint){ movies, movieError in
             guard let movies = movies else {
                 guard let movieError = movieError else { return }
                 print(movieError)
                 return
             }
-            print("***************************")
-            for movie in movies.results {
-                print(movie.title)
+            
+            switch endpoint {
+            case .popular:
+                self.mostPopularMovies = movies
+            case .topRated:
+                self.topRatedMovies = movies
+            case .nowPlaying:
+                print("not implemented")
+            case .upcoming:
+                print("not implemented")
             }
+            
+            completion()
         }
     }
-    
+
     func searchMovie(query: String) {
         movieStore.searchMovie(query: query){ movies, movieError in
             guard let movies = movies else {
