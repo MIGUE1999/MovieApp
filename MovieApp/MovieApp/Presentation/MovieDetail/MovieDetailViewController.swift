@@ -8,11 +8,13 @@
 import UIKit
 import WebKit
 import youtube_ios_player_helper
+import Cosmos
 
 class MovieDetailViewController: UIViewController {
     
     private let movie: Movie
-    
+    var movieDetailViewModel: MovieDetailViewModel?
+
     private let titleLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -29,44 +31,49 @@ class MovieDetailViewController: UIViewController {
         label.text = "This is the best movie ever to watch as a mafia!"
         return label
     }()
-    
-    private let downloadButton : UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .red
-        button.setTitle("Download", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 9
-        button.layer.masksToBounds = true
-        return button
-    }()
-    
-    private let webView : WKWebView = {
-        let webView = WKWebView()
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        return webView
-    }()
-    
-    private let playerView : YTPlayerView = {
+        
+    let playerView : YTPlayerView = {
         let playerView = YTPlayerView()
         playerView.translatesAutoresizingMaskIntoConstraints = false
         return playerView
     }()
     
+    private let ratingLabel : UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.text = "Valoración"
+        return label
+    }()
+    
+    private let ratingView : CosmosView = {
+        let ratingView = CosmosView()
+        ratingView.translatesAutoresizingMaskIntoConstraints = false
+        ratingView.settings.totalStars = 10
+        ratingView.settings.updateOnTouch = false
+        return ratingView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setViewModel()
         view.backgroundColor = .systemBackground
         view.addSubview(titleLabel)
         view.addSubview(overviewLabel)
-        view.addSubview(downloadButton)
-        //view.addSubview(webView)
         view.addSubview(playerView)
+        view.addSubview(ratingLabel)
+        view.addSubview(ratingView)
         
         configureContraints()
         
         print("Detail: \(movie.id)")
         configure()
         
+    }
+    
+    private func setViewModel() {
+        let movieStore = MovieStore.shared
+        self.movieDetailViewModel = MovieDetailViewModel(movieId: movie.id, movieStore: movieStore, movieDetailViewController: self)
     }
     
     func configureContraints(){
@@ -89,23 +96,27 @@ class MovieDetailViewController: UIViewController {
             overviewLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ]
         
-        let downloadButtonConstraints = [
-            downloadButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            downloadButton.topAnchor.constraint(equalTo: overviewLabel.bottomAnchor, constant: 25),
-            downloadButton.widthAnchor.constraint(equalToConstant: 150)
+        let ratingLabelConstraints = [
+            ratingLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            ratingLabel.topAnchor.constraint(equalTo: overviewLabel.bottomAnchor, constant: 25),
+        ]
+                
+        let ratingViewConstraints = [
+            ratingView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            ratingView.topAnchor.constraint(equalTo: ratingLabel.bottomAnchor, constant: 25),
         ]
         
-        //NSLayoutConstraint.activate(webViewConstraints)
         NSLayoutConstraint.activate(playerViewConstraints)
         NSLayoutConstraint.activate(titleLabelConstratints)
         NSLayoutConstraint.activate(overviewLabelConstraints)
-        NSLayoutConstraint.activate(downloadButtonConstraints)
+        NSLayoutConstraint.activate(ratingLabelConstraints)
+        NSLayoutConstraint.activate(ratingViewConstraints)
     }
     
     func configure(){
-        titleLabel.text = "EL PADRINO"
-        overviewLabel.text = "El Padrino es una pelicula sobre la mafia italiana..."
-        playerView.load(withVideoId: "Ew9ngL1GZvs")
+        titleLabel.text = movie.title
+        overviewLabel.text = movie.overview
+        ratingView.rating = movie.voteAverage
     }
 
     init(movie: Movie) {

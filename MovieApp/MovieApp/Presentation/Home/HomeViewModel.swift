@@ -23,7 +23,7 @@ final class HomeViewModel{
                 self.homeViewController.movieMostPopularCollectionView.reloadData()
             }
         }
-        
+                
         self.fetchMovies(from: .topRated){
             DispatchQueue.main.async {
                 self.homeViewController.movieTopRatedCollectionView.reloadData()
@@ -52,6 +52,10 @@ final class HomeViewModel{
                 guard let movieError = movieError else { return }
                 print(movieError)
                 return
+            }
+            
+            for i in movies.results{
+                print(i.overview)
             }
             
             switch endpoint {
