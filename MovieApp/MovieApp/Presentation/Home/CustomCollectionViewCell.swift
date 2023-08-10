@@ -12,7 +12,6 @@ class CustomCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 16)
-        label.backgroundColor = .green
         return label
     }()
     
@@ -20,16 +19,13 @@ class CustomCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
-        imageView.backgroundColor = .green
+        imageView.layer.cornerRadius = 10
         return imageView
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(posterImageView)
-        //contentView.addSubview(titleLabel)
-        
-        layer.cornerRadius = 10 // Ajusta este valor según el redondeo deseado
         layer.masksToBounds = true
         
         //setLabelConstraints()

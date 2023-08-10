@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class HomeViewModel{
+final class HomeViewModel {
 
     private let movieStore: MovieService
     private let homeViewController: HomeViewController
@@ -53,11 +53,7 @@ final class HomeViewModel{
                 print(movieError)
                 return
             }
-            
-            for i in movies.results{
-                print(i.overview)
-            }
-            
+
             switch endpoint {
             case .popular:
                 self.mostPopularMovies = movies
@@ -73,17 +69,5 @@ final class HomeViewModel{
         }
     }
 
-    func searchMovie(query: String) {
-        movieStore.searchMovie(query: query){ movies, movieError in
-            guard let movies = movies else {
-                guard let movieError = movieError else { return }
-                print(movieError)
-                return
-            }
-            print("***************************")
-            for movie in movies.results {
-                print(movie.title)
-            }
-        }
-    }
+    
 }

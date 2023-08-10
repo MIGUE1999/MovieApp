@@ -26,7 +26,6 @@ final class TabBarViewController: UITabBarController {
         searchNavController.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 1)
         
         searchNavController.navigationController?.navigationBar.isTranslucent = false
-
                 
         self.tabBar.barTintColor = .black
         self.tabBar.unselectedItemTintColor = UIColor.white.withAlphaComponent(0.8)

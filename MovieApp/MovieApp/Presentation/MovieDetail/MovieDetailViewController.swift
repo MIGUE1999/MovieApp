@@ -80,7 +80,7 @@ class MovieDetailViewController: UIViewController {
     func configureContraints(){
     
         let playerViewConstraints = [
-            playerView.topAnchor.constraint(equalTo: view.topAnchor,constant: 50),
+            playerView.topAnchor.constraint(equalTo: view.topAnchor),
             playerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             playerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             playerView.heightAnchor.constraint(equalToConstant: 300)

@@ -8,12 +8,12 @@
 import Foundation
 
 final class MovieDetailViewModel{
-
+    
     private let movieStore: MovieService
     private let movieDetailViewController: MovieDetailViewController
     var videoResults: [Result]?
     private var trailerKey: String?
-
+    
     init(movieId: Int, movieStore: MovieService, movieDetailViewController: MovieDetailViewController){
         self.movieStore = movieStore
         self.movieDetailViewController = movieDetailViewController
@@ -24,7 +24,7 @@ final class MovieDetailViewModel{
             }
         }
     }
-
+    
     func getTrailer(movieId: Int, completion: @escaping () -> ()){
         movieStore.getTrailer(movieId: movieId){ video, movieError in
             guard let videos = video?.results else {
@@ -37,7 +37,7 @@ final class MovieDetailViewModel{
                 if(video.type == "Trailer" && video.site == "YouTube"){
                     self.trailerKey = video.key
                 }
-
+                
                 if(video.official && video.type == "Trailer" && video.site == "YouTube") {
                     print(video.key)
                     self.trailerKey = video.key
