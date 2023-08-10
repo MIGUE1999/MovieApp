@@ -19,6 +19,7 @@ class MovieDetailViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 22, weight: .bold)
+        label.numberOfLines = 0
         label.text = "God Father"
         return label
     }()
@@ -87,13 +88,14 @@ class MovieDetailViewController: UIViewController {
         
         let titleLabelConstratints = [
             titleLabel.topAnchor.constraint(equalTo: playerView.bottomAnchor, constant: 20),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 20)
         ]
         
         let overviewLabelConstraints = [
             overviewLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 15),
             overviewLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            overviewLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            overviewLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ]
         
         let ratingLabelConstraints = [
@@ -115,7 +117,11 @@ class MovieDetailViewController: UIViewController {
     
     func configure(){
         titleLabel.text = movie.title
-        overviewLabel.text = movie.overview
+        if(movie.overview != "" ) {
+            overviewLabel.text = movie.overview
+        } else {
+            overviewLabel.text = "Información no disponible en este momento"
+        }
         ratingView.rating = movie.voteAverage
     }
 

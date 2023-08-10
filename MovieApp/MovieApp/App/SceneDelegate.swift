@@ -17,10 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)
         let viewController = TabBarViewController(nibName: "TabBarViewController", bundle: nil)
 
-        //let viewController = HomeViewController(nibName: "HomeViewController", bundle: nil)
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.navigationBar.isHidden = false
-        
         window.overrideUserInterfaceStyle = .dark
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
