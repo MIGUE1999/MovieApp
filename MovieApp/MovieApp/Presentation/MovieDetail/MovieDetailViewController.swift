@@ -14,13 +14,26 @@ class MovieDetailViewController: UIViewController {
     
     private let movie: Movie
     var movieDetailViewModel: MovieDetailViewModel?
-
+    
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.backgroundColor = .red
+        
+        return scrollView
+    }()
+    
+    private let contentView: UIView = {
+        let contentView = UIView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        return contentView
+    }()
+    
     private let titleLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 22, weight: .bold)
         label.numberOfLines = 0
-        label.text = "God Father"
         return label
     }()
     
@@ -29,7 +42,6 @@ class MovieDetailViewController: UIViewController {
         label.font = .systemFont(ofSize: 18, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.text = "This is the best movie ever to watch as a mafia!"
         return label
     }()
         
@@ -59,15 +71,16 @@ class MovieDetailViewController: UIViewController {
         super.viewDidLoad()
         setViewModel()
         view.backgroundColor = .systemBackground
-        view.addSubview(titleLabel)
-        view.addSubview(overviewLabel)
-        view.addSubview(playerView)
-        view.addSubview(ratingLabel)
-        view.addSubview(ratingView)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(playerView)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(overviewLabel)
+        contentView.addSubview(ratingLabel)
+        contentView.addSubview(ratingView)
         
         configureContraints()
         
-        print("Detail: \(movie.id)")
         configure()
         
     }
@@ -78,36 +91,57 @@ class MovieDetailViewController: UIViewController {
     }
     
     func configureContraints(){
-    
+        
+        let scrollViewConstraints = [
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ]
+        
+        let contentViewConstraints = [
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            contentView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor)
+        ]
+        
+
         let playerViewConstraints = [
-            playerView.topAnchor.constraint(equalTo: view.topAnchor),
-            playerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            playerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            playerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            playerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            playerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             playerView.heightAnchor.constraint(equalToConstant: 300)
         ]
         
         let titleLabelConstratints = [
-            titleLabel.topAnchor.constraint(equalTo: playerView.bottomAnchor, constant: 20),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 20)
+            titleLabel.topAnchor.constraint(equalTo: playerView.bottomAnchor, constant: 10),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 20)
+
         ]
-        
+ 
         let overviewLabelConstraints = [
             overviewLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 15),
-            overviewLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            overviewLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            overviewLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            overviewLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            overviewLabel.heightAnchor.constraint(equalToConstant: 300)
         ]
         
         let ratingLabelConstraints = [
-            ratingLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            ratingLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             ratingLabel.topAnchor.constraint(equalTo: overviewLabel.bottomAnchor, constant: 25),
         ]
                 
         let ratingViewConstraints = [
-            ratingView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            ratingView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             ratingView.topAnchor.constraint(equalTo: ratingLabel.bottomAnchor, constant: 25),
         ]
-        
+    
+        NSLayoutConstraint.activate(scrollViewConstraints)
+        NSLayoutConstraint.activate(contentViewConstraints)
         NSLayoutConstraint.activate(playerViewConstraints)
         NSLayoutConstraint.activate(titleLabelConstratints)
         NSLayoutConstraint.activate(overviewLabelConstraints)

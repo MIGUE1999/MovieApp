@@ -16,17 +16,6 @@ class SearchViewController: UIViewController {
     
     private let searchController = UISearchController(searchResultsController: nil)
     
-    /*
-    var searchTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.showsVerticalScrollIndicator = false
-        tableView.allowsSelection = true
-        
-        return tableView
-    }()
-    */
-    
     var searchCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
@@ -46,8 +35,6 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         setViewModel()
         setupSearchController()
-        //setupSearchTableView()
-        //addSearchTableConstraints()
         view.addSubview(searchCollectionView)
         setupSearchCollectionView()
         setConstraintsSearchCollectionView()
@@ -83,25 +70,6 @@ class SearchViewController: UIViewController {
         // Register cell
         searchCollectionView.register(MovieTableViewCell.self, forCellWithReuseIdentifier: MovieTableViewCell.identifier)
     }
-    
-    /*
-    func setupSearchTableView() {
-        searchTableView.dataSource = self
-        searchTableView.register(MovieTableViewCell.self, forCellReuseIdentifier: MovieTableViewCell.identifier)
-    }
-    
-    
-    func addSearchTableConstraints() {
-        view.addSubview(searchTableView)
-        
-        NSLayoutConstraint.activate([
-            searchTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            searchTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            searchTableView.topAnchor.constraint(equalTo: view.topAnchor),
-            searchTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
-    }
-     */
     
 }
 

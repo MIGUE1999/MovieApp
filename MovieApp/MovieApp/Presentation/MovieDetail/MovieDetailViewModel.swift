@@ -2,7 +2,7 @@
 //  MovieDetailViewModel.swift
 //  MovieApp
 //
-//  Created by Tejada Ortigosa Miguel Angel on 9/8/23.
+//  Created by Tejada Ortigosa Miguel Angel on 10/8/23.
 //
 
 import Foundation

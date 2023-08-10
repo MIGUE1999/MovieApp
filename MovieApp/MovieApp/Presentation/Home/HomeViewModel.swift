@@ -17,7 +17,6 @@ final class HomeViewModel {
     init(movieStore: MovieService, homeViewController: HomeViewController){
         self.movieStore = movieStore
         self.homeViewController = homeViewController
-        //self.fetchMovie(id: 346698)
         self.fetchMovies(from: .popular){
             DispatchQueue.main.async {
                 self.homeViewController.movieMostPopularCollectionView.reloadData()
@@ -27,21 +26,6 @@ final class HomeViewModel {
         self.fetchMovies(from: .topRated){
             DispatchQueue.main.async {
                 self.homeViewController.movieTopRatedCollectionView.reloadData()
-            }
-        }
-        //self.searchMovie(query: "Barbie")
-    }
-
-    func fetchMovie(id: Int) {
-        movieStore.fetchMovie(id: id) { movie, movieError in
-            if(movie != nil) {
-                print(movie!.title)
-            } else {
-                if(movieError != nil){
-                    print("Movie Error detectado: \(String(describing: movieError?.localizedDescription))")
-                } else {
-                    print("ERROR RARO")
-                }
             }
         }
     }

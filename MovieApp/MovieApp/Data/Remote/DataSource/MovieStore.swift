@@ -10,13 +10,16 @@ import Foundation
 class MovieStore: MovieService {
     
     static let shared = MovieStore()
-    private init() {}
-    
     private let apiKey = "d86551bcbbee12dda9766345f16c9c32"
     private let baseApiUrl = "https://api.themoviedb.org/3"
-    private let urlSession = URLSession.shared
+    private let urlSession: URLSession
     private let jsonDecoder = Utils.jsonDecoder
 
+    
+    init(session: URLSession = URLSession.shared) {
+        self.urlSession = session
+    }
+    
     func fetchMovies(from endpoint: MovieListEndpoint, completion: @escaping ( MovieResponse?, MovieError?) -> ()) {
         
         guard let url = URL(string: "\(baseApiUrl)/movie/\(endpoint.rawValue)") else {
@@ -29,15 +32,7 @@ class MovieStore: MovieService {
         ], completion: completion)
     
     }
-    
-    func fetchMovie(id: Int, completion: @escaping (Movie?, MovieError?) -> ()) {
-        guard let url = URL(string: "\(baseApiUrl)/movie/\(id)") else {
-            completion(nil, .invalidEndpoint)
-            return
-        }
-        self.loadURLAndDecode(url: url, params:  ["append_to_response": "videos, credits"], completion: completion)
-    }
-    
+        
     func searchMovie(query: String, completion: @escaping (MovieResponse?, MovieError?) -> ()) {
         
         guard let url = URL(string: "\(baseApiUrl)/search/movie") else {
