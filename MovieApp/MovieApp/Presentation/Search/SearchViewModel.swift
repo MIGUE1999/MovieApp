@@ -17,7 +17,6 @@ final class SearchViewModel {
     init(movieStore: MovieService, searchViewController: SearchViewController){
         self.movieStore = movieStore
         self.searchViewController = searchViewController
-        //self.fetchMovie(id: 346698)
         self.searchMovie(query: "Barbie") {
             DispatchQueue.main.async {
                 self.searchViewController.searchCollectionView.reloadData()
@@ -31,10 +30,6 @@ final class SearchViewModel {
                 guard let movieError = movieError else { return }
                 print(movieError)
                 return
-            }
-            print("***************************")
-            for movie in movies.results {
-                print(movie.title)
             }
             
             self.searchMovies = movies

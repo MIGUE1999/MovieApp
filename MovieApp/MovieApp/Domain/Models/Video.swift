@@ -19,11 +19,8 @@ struct Result: Codable {
     let site: String
     let type: String
     let official: Bool
-    let publishedAt, id: String
 
     enum CodingKeys: String, CodingKey {
         case key, site, type, official
-        case publishedAt = "published_at"
-        case id
     }
 }

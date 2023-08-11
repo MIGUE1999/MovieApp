@@ -20,7 +20,6 @@ final class MovieDetailViewModel{
         self.getTrailer(movieId: movieId){
             DispatchQueue.main.async {
                 self.movieDetailViewController.playerView.load(withVideoId: self.trailerKey ?? "")
-                print("FIN COMPLETION")
             }
         }
     }

@@ -28,7 +28,6 @@ class CustomCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(posterImageView)
         layer.masksToBounds = true
         
-        //setLabelConstraints()
         setImageConstraints()
     }
     

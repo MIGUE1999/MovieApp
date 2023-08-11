@@ -9,9 +9,7 @@ import UIKit
 
 
 class SearchViewController: UIViewController {
-    
-    let titles = ["PELI1", "PELI2", "PELI3", "PELI4", "PELI5"]
-    
+        
     var searchViewModel: SearchViewModel?
     
     private let searchController = UISearchController(searchResultsController: nil)
@@ -110,50 +108,6 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     }
 }
 
-
-
-
-
-/*
- // Mark: - TableView Functions
-
-extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchViewModel?.searchMovies?.results.count ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieTableViewCell.identifier , for: indexPath) as? MovieTableViewCell else {return UITableViewCell()}
-                
-        guard let movie = searchViewModel?.searchMovies?.results[indexPath.row] else { return cell }
-        
-        if let imageURL = URL(string: Constants.imageEndpoint + movie.posterPath) {
-            cell.posterImageView.setImage(url: imageURL)
-        } else {
-            cell.posterImageView.image = UIImage(named: "prueba")
-        }
-                
-        cell.titleLabel.text = movie.title
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        print("HOLA")
-    }
-      /*
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("enn")
-        guard let movie = searchViewModel?.searchMovies?.results[indexPath.row] else { return }
-        let movieDetailViewController = MovieDetailViewController(movie: movie)
-        navigationController?.pushViewController(movieDetailViewController, animated: false)
-    }
-       */
-    
-}
-
-*/
 // Mark: - Search Controller Functions
 extension SearchViewController: UISearchResultsUpdating {
     
